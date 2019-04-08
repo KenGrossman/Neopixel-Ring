@@ -20,14 +20,21 @@ def clock():
     second //= 5
     print("Hours: {0:2} Minutes: {1:2} Seconds: {2:2}".format(hour, minute, second))
     
+    red = 0
+    blue = 0
+    green = 0
+    
     #Clear LEDs
     pixels.fill((0, 0, 0))
     
     print("----Setting clock hands to LEDs----")
     #Hour:Blue Minute:Green Second:Red
-    pixels[int(hour)] = (0, 0, 255)
-    pixels[int(minute)] = (0, 255, 0)
-    pixels[int(second)] = (255, 0, 0)
+    #Add color to existing values allowing colors to combine
+    pixels[hour] = (pixels[hour][0] + 0, pixels[hour][1] + 0, pixels[hour][2] + 255)
+    pixels[minute] = (pixels[minute][0] + 0, pixels[minute][1] + 255, pixels[minute][2] + 0)
+    pixels[second] = (pixels[second][0] + 255, pixels[second][1] + 0, pixels[second][2] + 0)
+
+    print(pixels)
 
 def loop():
     while(True):
